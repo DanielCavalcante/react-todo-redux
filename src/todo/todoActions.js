@@ -16,9 +16,9 @@ export const search = () => {
 };
 
 export const add = (description) => {
-  const request = axios.post(API, { description });
-  return {
-    type: 'TODO_ADDED',
-    payload: request
+  return dispatch => {
+    axios.post(API, { description })
+      .then(res => dispatch({type: 'TODO_ADDED', payload: res.data}))
+      .then(res => dispatch(search()))
   }
 };
