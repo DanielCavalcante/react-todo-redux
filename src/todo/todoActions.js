@@ -23,7 +23,7 @@ export const add = (description) => {
   }
 };
 
-export const maskAsDone = (todo) => {
+export const markAsDone = (todo) => {
   return dispatch => {
     axios.put(`${API}/${todo._id}`, { ...todo, done: true })
       .then(res => dispatch(search()))
@@ -33,6 +33,13 @@ export const maskAsDone = (todo) => {
 export const markAsPending = (todo) => {
   return dispatch => {
     axios.put(`${API}/${todo._id}`, { ...todo, done: false })
+      .then(res => dispatch(search()))
+  }
+};
+
+export const remove = (todo) => {
+  return dispatch => {
+    axios.delete(`${API}/${todo._id}`)
       .then(res => dispatch(search()))
   }
 };
